@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load staticfiles %}
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body style="font-family: 'Bookman Old Style'">
+        <table width="800" align="center">
+            <tr>
+                <th><a href="/home/?type=home">Home</a></th>
+                <th><a href="/hrloginpage/?type=hr_login">HR</a></th>
+                <th><a href="/applicantloginpage/?type=applicant_login">Applicant</a></th>
+                <th><a href="/managerloginpage/?type=manager_login">Manager</a></th>
+                <th><a href="/interviewerloginpage/?type=interviewer_login">Interviewer</a></th>
+                <th><a href="/#/">Search</a></th>
+                <th><a href="/#/">About Us</a></th>
+            </tr>
+        </table>
+        <br><br><br>
+
+{% if type == 'home' %}
+            <table width="1000"align="center" border="1" cellpadding="10">
+    <tr>
+        <td rowspan="9"><img src="{% static 'images/job.png' %}" width="500" alt=""></td>
+        <th align="center" height="20">Today's Opening</th>
+    </tr>
+    <tr>
+        <td height="10">Job1 : DBA(Database Administrator) Hyderabad India</td>
+    </tr>
+    <tr>
+        <td height="10">Job2 : Software Engineer : Benguluru , India </td>
+    </tr>
+    <tr>
+        <td height="10">job3 : Web Designer : Hyderabad, India</td>
+    </tr>
+    <tr>
+        <td height="10">job4 : Web Designer : Hyderabad, India</td>
+    </tr>
+    <tr>
+        <td height="10">job5 : Web Designer : Hyderabad, India</td>
+    </tr>
+    <tr>
+        <td height="10">job6 : Web Designer : Hyderabad, India</td>
+    </tr>
+    <tr>
+        <td height="10">job7 : Web Designer : Hyderabad, India</td>
+    </tr>
+    <tr>
+        <td height="10">job8 : Web Designer : Hyderabad, India</td>
+    </tr>
+</table>
+{% endif %}
+
+{% if type == 'hr_login' %}
+    <style>
+        .hr{
+            -webkit-border-radius: 50px;
+            -moz-border-radius: 50px;
+            border-radius: 50px;
+            margin: 15px;
+            float: left;
+            width: 40%;
+        }
+    </style>
+<div>
+ <th rowspan="4"><img src="{% static 'images/hr.png'%}" class="hr"></th>
+</div>
+    <form action="/hrsignin/" method="post">    {% csrf_token %}
+        <table  border="0" align="center">
+            <tr>
+
+                <th height="10" align="center">HR SignIn</th>
+            </tr>
+            <tr>
+                <td height="10">
+                    <input type="text" name="uname" placeholder="Username" required>
+                </td>
+            </tr>
+            <tr>
+                <td height="10">
+                    <input type="password" name="upass" placeholder="Password" required>
+                </td>
+            </tr>
+            <tr>
+                <td height="10">
+                    <input type="submit" value="login">
+                </td>
+            </tr>
+        </table>
+<font size="5" color="red" face="chiller">{{ msg }}</font>
+    </form>
+
+    <br> <br><br>
+    <form action="/hrsignup/" method="post">    {% csrf_token %}
+        <table align="center">
+            <tr>
+                <td colspan="4" align="center">HR SignUp</td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" name="name" placeholder="Name" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" name="company_name" placeholder="Company Name" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="email" name="username" placeholder="Username or Email" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="password"  name="password" placeholder="Password" required>
+                </td>
+
+            </tr>
+            <tr>
+                <td><input type="password" name="repassword" placeholder="RE-Enter Password" required></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Register">   </td>
+            </tr>
+
+        </table>
+    <font face="chiller" size="4" color="red">{{ msg|capfirst }}</font>
+
+    </form>
+{% endif %}
+
+{% if type == 'applicant_login' %}
+
+    <form action="/applicantsignin/" method="post">    {% csrf_token %}
+        <table align="center">
+              <tr>
+                <td colspan="4" align="center">Applicant SignIn</td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" name="uname" placeholder="Username" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="password" name="upass" placeholder="Password" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="login">
+                </td>
+            </tr>
+        </table>
+
+    </form>
+
+    <br> <br><br>
+    <form action="/applcantsignup/" method="post">    {% csrf_token %}
+        <table align="center">
+            <tr>
+                <td colspan="4" align="center">Applicant SignUp</td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" name="name" placeholder="Name" required>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input type="email" name="username" placeholder="Username or Email" required>
+                </td>
+            </tr>
+            <tr>
+            <tr>
+                <td>
+                    <input type="tel" name="phone" placeholder="Phone No" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="password"  name="password" placeholder="Password" required>
+                </td>
+
+            </tr>
+            <tr>
+                <td><input type="password" name="repassword" placeholder="RE-Enter Password" required></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Register">   </td>
+            </tr>
+
+        </table>
+    <font face="chiller" size="4" color="red">{{ msg|capfirst }}</font>
+
+    </form>
+{% endif %}
+
+{% if type == 'manager_login' %}
+    <form action="/managersignin/" method="post"> {% csrf_token %}
+    <table align="center">
+              <tr>
+                <td colspan="4" align="center">Manager SignIn</td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" name="uname" placeholder="Username" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="password" name="upass" placeholder="Password" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="login">
+                </td>
+            </tr>
+        </table>
+    </form>
+    <font color="red" size="5" face="chiller"> {{ msg|capfirst }}</font>
+{% endif %}
+
+{% if type == 'interviewer_login' %}
+    <form action="/interviewersignin/" method="post"> {% csrf_token %}
+    <table align="center">
+              <tr>
+                <td colspan="4" align="center">Interviewer SignIn</td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" name="uname" placeholder="Username" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="password" name="upass" placeholder="Password" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="login">
+                </td>
+            </tr>
+        </table>
+    </form>
+    <font face="chiller"  size="5" color="red">{{ msg|capfirst }}</font>
+{% endif %}
+
+</body>
+</html>

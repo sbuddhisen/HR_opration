@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>interviewer Home Page</title>
+</head>
+<body style="font-family: 'Bookman Old Style'">
+
+<table width="800" border="0" align="center">
+            <tr>
+                <td width="400"><a href="//">Profile</a></td>
+                <td width="500"><a href="/updateresult/?type=update_result">Update Result </a></td>
+                <td width="500"><a href="//">Search</a></td>
+                <td width="500"><a href="/home/">LogOut</a></td>
+            </tr>
+ </table>
+
+{% if type == 'update_result' %}
+    <table align="center">
+            <tr>
+                <th>Interview Result</th>
+            </tr>
+    </table>
+{% endif %}
+
+</body>
+</html>

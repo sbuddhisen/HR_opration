@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body style="font-family: 'Bookman Old Style'">
+
+
+ <table align="center" width="1000" border="0">
+            <tr>
+                <th width="400"><a href="/home/?email={{ email }}">Profile</a></th>
+                <th width="500"><a href="/managersignup/?email={{ email }}">Register a Manager </a></th>
+                <th width="500"><a href="/viewmanager/?email={{ email }}">View Managers </a></th>
+                <th width="500"><a href="//">View Resume</a></th>
+                <th width="500"><a href="/#/">Search</a></th>
+                <th width="500"><a href="/#/">LogOut</a></th>
+            </tr>
+ </table>
+ <br><br><br><br><br>
+{{ email }}
+
+
+{# profile#}
+ {% if hr %}
+        <table border="0">
+        <tr>
+            <th colspan="3">HR Home Page</th>
+        </tr>
+             {% for detail in hr %}
+            <tr>
+                <td>Name</td> <th width="100">:</th><td>{{ detail.name }}</td>
+            </tr>
+            <tr>
+                <td>Username</td> <th width="100">:</th><td>{{ detail.email }}</td>
+            </tr>
+            <tr>
+                <td>Company</td> <th width="100">:</th><td>{{ detail.company_name }}</td>
+            </tr>
+        </table>
+    {% endfor %}
+ {% endif %}
+
+{# register manager #}
+ {% if register_manager  %}
+           <form action="/managerregister/" method="post">{% csrf_token %}
+             <table border="1" align="center">
+                 <tr>
+                     <th height="30">
+                            <font size="4">Manager Register</font>
+                     </th>
+                 </tr>
+                   <tr>
+                        <td><input type="text" name="name" placeholder="Name" required></td>
+                   </tr>
+                   <tr>
+                       <td><input type="email" name="username" placeholder="Email or Username" required></td>
+                   </tr>
+                   <tr>
+                       <td><input type="password" name="password" placeholder="Password" required></td>
+                   </tr>
+                   <tr>
+                       <td><input type="tel" name="phone" placeholder="Phone No" required></td>
+                   </tr>
+                   <tr>
+                        <td><input type="submit" value="Register"></td>
+                   </tr>
+                   <tr>
+                        <td><input type="text" name="email" value="{{ email }} "></td>
+                   </tr>
+                </table>
+        </form>
+ {% endif %}
+
+{#view Manager#}
+{% if manager %}
+    <table align="center" width="300" border="1">
+        <tr>
+            <th colspan="5" height="50"> Manager Details </th>
+        </tr>
+        <tr>
+                    <th width="300">Name</th>
+                    <th width="300">Email/Username</th>
+                    <th width="300">Phone</th>
+                    <th width="300">Update</th>
+                    <th width="300">Delete</th>
+        </tr>
+        {% for detail in manager %}
+
+                <tr>
+                    <td width="300">{{ detail.name }}</td>
+                    <td width="300">{{ detail.email }}</td>
+                    <td width="300">{{ detail.phone }}</td>
+                    <td width="300">
+                    <form action="/managerupdate/" target="_blank" method="post">{% csrf_token %}
+{#                        <button pk={{ detail.email }}">Update</button>#}
+                        <input type="submit" value="Update">
+                        <input type="hidden"  name="uname" value="{{ detail.email }}" readonly>
+                        <input type="hidden" name="email" value="{{ email }}">
+                    </form>
+                    </td>
+                    <th width="300">
+                        <form action="/managerdelete/" method="post" target="_self">
+                            {% csrf_token %}
+                            <input type="submit" value="Delete">
+                            <input type="hidden"  name="pk" value="{{ detail.email }}" readonly>
+                        </form>
+                    </th>
+                </tr>
+        {% endfor %}
+    </table>
+ {% endif %}
+
+{# manager Update code#}
+  {% if managerupdate %}
+    <form action="/managerupdated/" method="post">{% csrf_token %}
+    <table align="center" border="1">
+    {% for detail in managerupdate %}
+        <tr>
+            <th colspan="3">Manager Update</th>
+        </tr>
+        <tr>
+            <td><input type="text" name="name" value="{{ detail.name }}" required></td>
+        </tr>
+        <tr>
+            <td><input type="text" name="uname" value="{{ detail.email }}" required></td>
+        </tr>
+        <tr>
+            <td><input type="password"  name="password" value="{{ detail.password }}" required></td>
+        </tr>
+        <tr>
+            <td><input type="number" name="phone" value="{{ detail.phone }}" required></td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Update"></td>
+        </tr>
+        <tr>
+            <td><input type="text" name="email" value="{{ email }}"></td>
+        </tr>
+    {% endfor %}
+
+    </table>
+    </form>
+{% endif %}
+
+
+</body>
+</html>

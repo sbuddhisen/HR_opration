@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Applicant Home Page</title>
+</head>
+<body style="font-family: 'Bookman Old Style'">
+
+<table width="800" border="0" align="center">
+            <tr>
+                <td width="400"><a href="/home/">Home</a></td>
+                <td width="500"><a href="/uploadresume/?type=upload_resume">upload resume</a></td>
+                <td width="500"><a href="/#/">view Status</a></td>
+                <td width="500"><a href="/#/">Search</a></td>
+                <td width="500"><a href="/#/">LogOut</a></td>
+            </tr>
+ </table>
+<br><br><br>
+<table align="center">
+{% for detail in details %}
+    <tr>
+        <th colspan="3" height="30"><font size="5">Applicant Details </font></th>
+    </tr>
+    <tr>
+        <td> Username</td>
+        <th width="100">:</th>
+        <td>{{ detail.email }}</td>
+    </tr>
+    <tr>
+        <td>Name</td>
+        <th width="100">:</th>
+        <td>{{ detail.name}}</td>
+    </tr>
+    <tr>
+        <td> Phone</td>
+        <th width="100">:</th>
+        <td>{{ detail.phone }}</td>
+    </tr>
+{% endfor %}
+
+    {% if type == 'upload_resume' %}
+
+    <form method="post" enctype="multipart/form-data">{% csrf_token %}
+        {{ resume.as_p }}
+
+        <button type="submit">Upload</button>
+    </form>
+{% endif %}
+
+
+
+</table>
+</body>
+</html>
